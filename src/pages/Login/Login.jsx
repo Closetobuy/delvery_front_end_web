@@ -1,5 +1,7 @@
-import { useRef, useState, useEffect, React } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
+
 // eslint-disable-next-line react/destructuring-assignment
+
 const Login = () => {
 
     const userRef=useRef();
@@ -26,11 +28,12 @@ const Login = () => {
     }
 
     return (
+        // <h1> Hello World! </h1>
         <section>
             <p ref={errRef} className={errMsg ? 'errMsg' : 'offscreen'} aria-live='assertive'>{errMsg}</p>
             <form onSubmit={handleSubmit}>
               <label htmlFor='username'>UserName:</label>
-              <input type='text' id='username' ref={useRef} autoComplete='off' onChange={(e) => setUser(e.target.value)} value={user} required/>
+              <input type='text' id='username' ref={userRef} autoComplete='off' onChange={(e) => setUser(e.target.value)} value={user} required/>
               <label htmlFor='password'>Password:</label>
               <input type='password' id='password' onChange={(e) => setPwd(e.target.value)} value={pwd} required/>
               <button>Sign In</button>
