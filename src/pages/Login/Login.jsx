@@ -1,21 +1,9 @@
-import React, { useRef, useState, useEffect, useContext } from 'react';
-import { loginFields } from "../../constants";
-import axios from "../../api/axios";
-const LOGIN_URL = '/auth';
-
-import AuthContext from '../../contexts/AuthProvider';
-import Tilt from "react-parallax-tilt";
-
-import { Input } from '../../components';
-
+import React, { useRef, useState, useEffect } from 'react';
 
 // eslint-disable-next-line react/destructuring-assignment
 
-// const fields = loginFields;
-// let fieldsState={};
-// fields.forEach(field=>fieldsState[field.id]);
 const Login = () => {
-    const { setAuth } = useContext(AuthContext);
+
     const userRef=useRef();
     const errRef = useRef();
     const [user, setUser] = useState('');
@@ -25,7 +13,7 @@ const Login = () => {
 
     useEffect(() => {
         userRef.current.focus();
-    }, [])
+    }, [user, pwd])
 
     useEffect(() => {
         setErrMsg('');
@@ -33,29 +21,6 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-            const response = await axios.post(LOGIN_URL, JSON.stringify({user,pwd}),
-            {headers: {'Content-Type':'application/json'}, withCredentials:ture});
-            console.log(JSON.stringify(response?.data));
-            const accessToken = respnse?.data?.accessToken;
-            const roles = response?.data?.roles;
-            setAuth({ user, pwd, roles, accessToken});
-            setUser('');
-            setPwd('');
-            setSuccess(ture)
-        } catch(err) {
-            if(!err?.response){
-                setErrMsg('No Server Response');
-            }else if (err?.response?.status == 400){
-                setErrMsg("Missing Username or Password")
-            }else if (err.response?.status == 401) {
-
-            }else{
-                setErrMsg("Login Failed");
-            }
-            errRef.current.focus()
-
-        }
         console.log(user, pwd);
         setUser('');
         setPwd('');
@@ -63,54 +28,11 @@ const Login = () => {
     }
 
     return (
-      
-            
-        <section>
-            <div className = "h-screen w-screen bg-main-dark-bg relative overflow-hidden flex flex-col justify-center items-center">
-            <div className="h-40-r w-40-r bg-gradient-to-r from-green-400 to-blue-500 rounded-full absolute left-2/3 -top-56 animate pulse"/>
-            <div className ="h-35-r w-35-r bg-gradient-to-r from-red-400 via-pink-500 to-purple-500 rounded-full absolute top-96 -left-20 animate-pulse"/>
-            <Tilt>
-                <div className="container h-96 w-96 bg-white bg-opacity-10 relative z-2 rounded-2xl shadow-5xl border-0.5 border-r-0 border-b-0 border-opacity-30 backdrop-filter backdrop-blur-sm">
-                <form className = "h-full flex flex-col justify-evenly items-center" onSubmit={handleSubmit}>
-                    <div className="font-poppins text-white text-2xl tracking-wider">Login</div>  
-                        <>{
-                            success? (<section>
-                                <h1> You are logged in!</h1>
-                                <br/>
-                                <p>
-                                    <a hred="#">Go to home</a>
-                                </p>
-                            </section>):
-                            (<div>
-                                    <input 
-                                        type="text"
-                                        id="username"
-                                        ref={userRef}
-                                        autoComplete="off"
-                                        onChange={(e)=>setUser(e.target.value)}
-                                        className="input-text"
-                                        placeholder="User Name"
-                                        value = {user}
-                                        required
-                                    />
+        // <h1> Hello World! </h1>
+        <div className="bg-gray-900 h-screen w-screen relative overflow-hidden">
+            <div className="h-40r w-40-r"></div>
 
-                                    <input
-                                        type="password"
-                                        id="password"
-                                        onChange={(e)=>setPwd(e.target.value)}
-                                        className="input-text"
-                                        placeholder="Password"
-                                        value={pwd}
-                                        required
-                                    />
-                            </div>)
-                        }</>
-                    <input type="Submit" className="font-poppins cursor-pointer px-5 py-1 rounded-full bg-white bg-opacity-50 hover:bg-opacity-80"/>
-                </form>
-                </div>
-            </Tilt>
-            </div>
-      </section>
+        </div>
         
      
        
