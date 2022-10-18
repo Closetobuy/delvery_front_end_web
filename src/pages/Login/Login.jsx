@@ -29,7 +29,13 @@ const Login = () => {
 
     return (
         // <h1> Hello World! </h1>
-        <section>
+        <div className="bg-gray-900 h-screen w-screen relative overflow-hidden">
+
+        </div>
+        
+     
+       
+            /* <section>
             <p ref={errRef} className={errMsg ? 'errMsg' : 'offscreen'} aria-live='assertive'>{errMsg}</p>
             <form onSubmit={handleSubmit}>
               <label htmlFor='username'>UserName:</label>
@@ -38,7 +44,7 @@ const Login = () => {
               <input type='password' id='password' onChange={(e) => setPwd(e.target.value)} value={pwd} required/>
               <button>Sign In</button>
             </form>
-        </section>
+        </section> */
     );
 }
 
