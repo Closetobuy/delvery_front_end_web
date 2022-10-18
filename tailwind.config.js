@@ -5,6 +5,7 @@ module.exports = {
     fontFamily: {
       display: ['Open Sans', 'sans-serif'],
       body: ['Open Sans', 'sans-serif'],
+      'poppins': ['Poppins', 'sans-serif']
     },
     extend: {
       fontSize: {
@@ -19,6 +20,7 @@ module.exports = {
       },
       borderWidth: {
         1: '1px',
+        0.5: '0.5px'
       },
       borderColor: {
         color: 'rgba(0, 0, 0, 0.1)',
@@ -46,6 +48,9 @@ module.exports = {
         'hero-pattern':
           "url('https://i.ibb.co/MkvLDfb/Rectangle-4389.png')",
       },
+      boxShadow: {
+        '5xl': '20px 20px 50px rgba(0, 0, 0 , 0.5)'
+      }
     },
   },
   plugins: [],

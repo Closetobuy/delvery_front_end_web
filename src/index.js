@@ -4,12 +4,16 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import { ContextProvider } from './contexts/ContextProvider';
+import { AuthProvider } from './contexts/AuthProvider';
+
 
 ReactDOM.render(
   <React.StrictMode>
-    <ContextProvider>
-      <App />
-    </ContextProvider>
+    <AuthProvider>
+      <ContextProvider>
+        <App />
+      </ContextProvider>
+    </AuthProvider>
   </React.StrictMode>,
   document.getElementById('root'),
 );

@@ -22,10 +22,13 @@ const App = () => {
   }, []);
 
   return (
-    <div className='bg-gray-900 h-screen w-screen'>
-
-    </div>
-    // <Login />
+    <Login/>
+  //  <Router>
+  //   <Routes>
+  //     <Route path="/" element={<Login />} />
+  //   </Routes>
+  //  </Router>
+   
     // <div className={currentMode === 'Dark' ? 'dark' : ''}>
     //   <Router>
     //     <div className="flex relative dark:bg-main-dark-bg">

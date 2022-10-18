@@ -20,3 +20,5 @@ const loginFields = [
         placeholder: "Password"
     }
 ]
+
+export default loginFields;
