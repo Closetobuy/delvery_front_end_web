@@ -3,11 +3,12 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { FiSettings } from 'react-icons/fi';
 import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 
-import { Navbar, Footer, Sidebar, ThemeSettings } from './components';
+import { Navbar, Footer, Sidebar, ThemeSettings, Layout } from './components';
 import { Ecommerce, Orders, Calendar, Employees, Stacked, Pyramid, Customers, Kanban, Line, Area, Bar, Pie, Financial, ColorPicker, ColorMapping, Editor, Login } from './pages';
 import './App.css';
 
 import { useStateContext } from './contexts/ContextProvider';
+import Dashboard from './pages/Dashboard/Dashboard';
 
 const App = () => {
   const { setCurrentColor, setCurrentMode, currentMode, activeMenu, currentColor, themeSettings, setThemeSettings } = useStateContext();
@@ -22,12 +23,15 @@ const App = () => {
   }, []);
 
   return (
-    <Login/>
-  //  <Router>
-  //   <Routes>
-  //     <Route path="/" element={<Login />} />
-  //   </Routes>
-  //  </Router>
+    // <Login/>
+   <Router>
+    <Routes>
+      <Route path="/" element={<Layout />} > 
+          <Route path="login" element={<Login />} /> 
+          <Route path="dashboard" element={(<Dashboard />)} />
+      </Route>
+    </Routes>
+   </Router>
    
     // <div className={currentMode === 'Dark' ? 'dark' : ''}>
     //   <Router>
@@ -71,10 +75,10 @@ const App = () => {
     //           {themeSettings && (<ThemeSettings />)}
 
     //           <Routes>
-              
+
     //             {/* <Route path="/ecommerce" >  */}
     //               {/* dashboard  */}
-    //               <Route path="/" element={} />
+    //               <Route path="/dashboard" > 
     //               <Route path="/ecommerce" element={(<Ecommerce />)} />
 
     //               {/* pages  */}
@@ -97,6 +101,7 @@ const App = () => {
     //               <Route path="/color-mapping" element={<ColorMapping />} />
     //               <Route path="/pyramid" element={<Pyramid />} />
     //               <Route path="/stacked" element={<Stacked />} />
+    //               </Route>
     //             {/*  </Route> */}
                 
                 
