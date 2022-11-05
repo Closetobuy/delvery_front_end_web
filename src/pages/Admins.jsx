@@ -19,7 +19,6 @@ const Admins = () => {
   const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();
   const location = useLocation();
-  var adminStruct = [];
 
   useEffect(() => {
     let isMounted = true;
@@ -50,6 +49,8 @@ const Admins = () => {
   }, []);
 
   function adminList(adminData) {
+    var adminStruct = [];
+
     // {
     //   EmployeeID: 1,
     //   Name: 'Nancy Davolio',

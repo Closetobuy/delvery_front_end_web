@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { ColorRing } from "react-loader-spinner";
-import { axiosPrivate } from "../../../api/axios";
+import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 import { useStepperContext } from "../../../contexts/StepperContext";
 const REGISTER_URL = "/v1/riders";
 
@@ -11,16 +11,16 @@ const Final = () => {
 
   const { errMsg, setErrMsg } = useState("");
 
+  const { isLoading, setLoading } = useState(false);
+
+  const axiosPrivate = useAxiosPrivate();
+
   useEffect(() => {
     uploadRiderDetails();
   }, []);
 
-  const uploadRiderDetails = async () => {
-    console.log("Upload Rider State");
-    console.log(userData);
-    console.log(userData["username"]);
-    console.log(userData["email"]);
-    console.log(userData["password"]);
+  const uploadRiderDetails = async (e) => {
+    setLoading(true);
 
     try {
       const response = await axiosPrivate.post(
@@ -29,8 +29,8 @@ const Final = () => {
           name: userData["username"],
           email: userData["email"],
           password: userData["password"],
-          // phoneNumber: userData["phoneNumber"],
-          role: "user",
+          phoneNumber: userData["phoneNumber"],
+          role: "rider",
         })
       );
       console.log(response);
@@ -44,6 +44,8 @@ const Final = () => {
       }
       errRef.current.focus();
     }
+
+    setLoading(false);
   };
 
   return (
@@ -59,11 +61,14 @@ const Final = () => {
       >
         {errMsg}
       </p>
-      <div className="flex justify-center">
-        <ColorRing height={100} />
-      </div>
-      <div className="flex justify-center">
-        <div className="text-slate-600 font-bold">Uploading Details</div>
+
+      <div>
+        <div className="flex justify-center">
+          <ColorRing height={100} />
+        </div>
+        <div className="flex justify-center">
+          <div className="text-slate-600 font-bold">Uploading Details</div>
+        </div>
       </div>
     </div>
   );
