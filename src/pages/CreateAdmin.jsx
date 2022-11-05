@@ -4,7 +4,7 @@ import { GridComponent, Inject, ColumnsDirective, ColumnDirective, Search, Page 
 import { employeesData, employeesGrid } from '../data/dummy';
 import { Header } from '../components';
 
-const Employees = () => {
+const CreateAdmin = () => {
   const toolbarOptions = ['Search'];
 
   const editing = { allowDeleting: true, allowEditing: true };
@@ -12,6 +12,16 @@ const Employees = () => {
   return (
     <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
       <Header category="Page" title="Employees" />
+      {/* {
+      EmployeeID: 1,
+      Name: 'Nancy Davolio',
+      Title: 'Sales Representative',
+      HireDate: '01/02/2021',
+      Country: 'USA',
+      ReportsTo: 'Carson',
+      EmployeeImage:
+      avatar3,
+    }, */}
       <GridComponent
         dataSource={employeesData}
         width="auto"
@@ -31,4 +41,4 @@ const Employees = () => {
     </div>
   );
 };
-export default Employees;
+export default CreateAdmin;

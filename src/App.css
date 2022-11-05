@@ -47,5 +47,6 @@
 }
 
 .input-text{
-  @apply font-poppins text-white bg-transparent focus:outline-none border border-r-0 border-t-0 border-l-0 tracking-wide;
+  @apply font-poppins text-white bg-transparent focus:outline-none focus:ring-0 border-r-0 border-t-0 border-l-0 tracking-wide;
+  min-width: 80%;
 }

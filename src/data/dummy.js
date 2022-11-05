@@ -1,5 +1,5 @@
 import React from 'react';
-import { AiOutlineCalendar, AiOutlineShoppingCart, AiOutlineAreaChart, AiOutlineBarChart, AiOutlineStock } from 'react-icons/ai';
+import { AiOutlineCalendar, AiOutlineShoppingCart, AiOutlineAreaChart, AiOutlineBarChart, AiOutlineStock, AiOutlineUsergroupAdd, AiOutlineUserAdd } from 'react-icons/ai';
 import { FiShoppingBag, FiEdit, FiPieChart, FiBarChart, FiCreditCard, FiStar, FiShoppingCart } from 'react-icons/fi';
 import { BsKanban, BsBarChart, BsBoxSeam, BsCurrencyDollar, BsShield, BsChatLeft } from 'react-icons/bs';
 import { BiColorFill } from 'react-icons/bi';
@@ -61,6 +61,7 @@ export const kanbanGrid = [
     keyField: 'Close',
     allowToggle: true },
 ];
+
 const gridEmployeeProfile = (props) => (
   <div className="flex items-center gap-2">
     <img
@@ -479,7 +480,6 @@ export const links = [
       },
     ],
   },
-
   {
     title: 'Pages',
     links: [
@@ -488,13 +488,26 @@ export const links = [
         icon: <AiOutlineShoppingCart />,
       },
       {
-        name: 'employees',
+        name: 'admins',
         icon: <IoMdContacts />,
       },
       {
-        name: 'customers',
+        name: 'riders',
         icon: <RiContactsLine />,
       },
+    ],
+  },
+  {
+    title: 'Add',
+    links: [
+      {
+        name: 'admin',
+        icon: <AiOutlineUsergroupAdd />,
+      },
+      {
+        name: 'rider',
+        icon: <AiOutlineUserAdd />,
+      }
     ],
   },
   {
