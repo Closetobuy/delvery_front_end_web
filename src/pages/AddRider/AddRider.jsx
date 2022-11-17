@@ -1,21 +1,19 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Header } from "../components";
-import { UseStepperContextProvider } from "../contexts/StepperContext";
-import StepperControl from "../components/Stepper/StepperControl";
-import Stepper from "../components/Stepper/Stepper";
+import { Header } from "../../components";
+import { UseStepperContextProvider } from "../../contexts/StepperContext";
+import StepperControl from "../../components/Stepper/StepperControl";
+import Stepper from "../../components/Stepper/Stepper";
 import {
   AccountInformation,
   BankDetails,
   LegalInformation,
   Final,
-} from "../components/Stepper/Steps";
+} from "../../components/Stepper/Steps";
 
 const AddRider = () => {
   const [currentStep, setCurrentStep] = useState(1);
-  const [userData, setUserData] = useState("");
-  const [finalData, setFinalData] = useState([]);
 
-  const steps = ["Basic Info", "Legal Info", "Bank Info", "Completed"];
+  const steps = ["Basic Info", "Legal Info", "Bank Info", "Upload"];
 
   const displayStep = (step) => {
     switch (step) {
@@ -34,8 +32,11 @@ const AddRider = () => {
 
   const handleChange = (direction) => {
     let newStep = currentStep;
-
-    direction === "next" ? newStep++ : newStep--;
+    if (direction === "home") {
+      newStep = 1;
+    } else {
+      direction === "next" ? newStep++ : newStep--;
+    }
 
     newStep > 0 && newStep <= steps.length && setCurrentStep(newStep);
   };

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { ImageSelectors, SquareImageSelector } from "../../ImageSelectors";
+import { useStepperContext } from "../../../contexts/StepperContext";
 
 const LegalInformation = () => {
   const [licenseImage, setLicenseImage] = useState(null);
@@ -7,33 +8,35 @@ const LegalInformation = () => {
   const [permitImage, setPermitImage] = useState(null);
   const [emissionCertificate, setEmissionCertificate] = useState(null);
 
-  useEffect(() => {
-    console.log(licenseImage);
-    console.log(rcImage);
-    console.log(permitImage);
-    console.log(emissionCertificate);
-  }, [licenseImage, rcImage, permitImage, emissionCertificate]);
+  const { userData, setUserData } = useStepperContext();
+
+  const handleChange = ({ imageType, file }) => {
+    // const { id, value } = e.target;
+    console.log(imageType);
+    console.log(file);
+    setUserData({ ...userData, [imageType]: file });
+    console.log(userData);
+  };
 
   return (
     <div>
-      {/* Select License Image */}
       <div className="grid grid-cols-1 sm:grid-cols-2">
+        {/* Select License Image */}
         <SquareImageSelector
           selectedFile={licenseImage}
-          onFileSelect={(licenseImage) => setLicenseImage(licenseImage)}
+          onFileSelect={(licenseImage) => {
+            setLicenseImage(licenseImage);
+            handleChange({ imageType: "licenseImage", file: licenseImage });
+          }}
           imageType={"License"}
         />
 
-        {/* <div>{"Hello World"}</div> */}
-
         {/* Select RC Image */}
-        {/* <div>{"Hello World"}</div> */}
-
         <SquareImageSelector
           selectedFile={rcImage}
           onFileSelect={(rcImage) => {
-            console.log(rcImage);
             setRCImage(rcImage);
+            handleChange({ imageType: "rcImage", file: rcImage });
           }}
           imageType={"RC"}
         />
@@ -43,16 +46,23 @@ const LegalInformation = () => {
         {/* Select Permit Image */}
         <SquareImageSelector
           selectedFile={permitImage}
-          onFileSelect={(permitImage) => setPermitImage(permitImage)}
+          onFileSelect={(permitImage) => {
+            setPermitImage(permitImage);
+            handleChange({ imageType: "permitImage", file: permitImage });
+          }}
           imageType={"Permit"}
         />
 
         {/* Select Emission Certificate Image */}
         <SquareImageSelector
           selectedFile={emissionCertificate}
-          onFileSelect={(emissionCertificate) =>
-            setEmissionCertificate(emissionCertificate)
-          }
+          onFileSelect={(emissionCertificate) => {
+            setEmissionCertificate(emissionCertificate);
+            handleChange({
+              imageType: "emissionImage",
+              file: emissionCertificate,
+            });
+          }}
           imageType={"Emission"}
         />
       </div>

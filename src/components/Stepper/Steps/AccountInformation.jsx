@@ -74,7 +74,6 @@ const AccountInformation = () => {
   const handleChange = (e) => {
     const { id, value } = e.target;
     setUserData({ ...userData, [id]: value });
-    console.log(userData);
   };
 
   return (
@@ -152,20 +151,6 @@ const AccountInformation = () => {
         isValid={validEmail}
         invalidText={"Enter a valid email."}
       />
-      {/* {emailFocus && !validEmail ? (
-        <div id="confirmnote" className={"flex flex-row gap-2 -mt-4 mb-3"}>
-          <ExclamationCircleIcon
-            className={
-              "flex-none w-5 text-gray-500 items-center justify-center"
-            }
-          ></ExclamationCircleIcon>
-          <p className={"flex-grow text-black text-sm items-center"}>
-            Enter a valid email.
-          </p>
-        </div>
-      ) : (
-        <div></div>
-      )} */}
       <PasswordInput
         type={showPassword ? "text" : "password"}
         onChange={handleChange}
@@ -204,112 +189,6 @@ const AccountInformation = () => {
         showPassword={showPassword}
         setShowPassword={() => setShowPassword(!showPassword)}
       />
-      {/* <div className="relative flex block form-group mb-6">
-        {showPassword ? (
-          <EyeIcon
-            height={10}
-            width={10}
-            className="wpointer-events-none w-5 h-5 absolute top-1/2 transform -translate-y-1/2 right-3 text-blue-400"
-            onClick={() => setShowPassword(!showPassword)}
-          />
-        ) : (
-          <EyeSlashIcon
-            height={12}
-            width={12}
-            className="wpointer-events-none w-5 h-5 absolute top-1/2 transform -translate-y-1/2 right-3 text-gray-400"
-            onClick={() => setShowPassword(!showPassword)}
-          />
-        )}
-        <input
-          type={showPassword ? "text" : "password"}
-          onChange={(e) => setPwd(e.target.value)}
-          required
-          aria-invalid={validPwd ? "false" : "true"}
-          aria-describedby="pwdnote"
-          value={pwd}
-          className="form-control w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-          id="password"
-          placeholder="Password"
-          onFocus={() => setPwdFocus(true)}
-          onBlur={() => setPwdFocus(false)}
-          isFocused={pwdFocus}
-          isValid={validEmail}
-        />
-       
-      </div> */}
-      {/* {pwdFocus && !validPwd ? (
-        <div id="confirmnote" className={"flex flex-row gap-2 -mt-4 mb-3"}>
-          <ExclamationCircleIcon
-            className={"flex-none w-5 text-gray-500"}
-          ></ExclamationCircleIcon>
-          <p
-            className={"flex-grow self-center text-black text-sm items-center"}
-          >
-            Must Containe Uppercase, Lowercase, Special Symbols (!, @, $),
-            Number, Length - 8.
-          </p>
-        </div>
-      ) : (
-        <div></div>
-      )} */}
-      {/* <div className="form-group mb-6 relative">
-        {showPassword ? (
-          <EyeIcon
-            height={10}
-            width={10}
-            className="wpointer-events-none w-5 h-5 absolute top-1/2 transform -translate-y-1/2 right-3 text-blue-400"
-            onClick={() => setShowPassword(!showPassword)}
-          />
-        ) : (
-          <EyeSlashIcon
-            height={12}
-            width={12}
-            className="wpointer-events-none w-5 h-5 absolute top-1/2 transform -translate-y-1/2 right-3 text-gray-400"
-            onClick={() => setShowPassword(!showPassword)}
-          />
-        )}
-        <input
-          type={showPassword ? "text" : "password"}
-          className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-          id="confirm_pwd"
-          onChange={(e) => setMatchPwd(e.target.value)}
-          required
-          value={matchPwd}
-          aria-invalid={validMatch ? "false" : "true"}
-          aria-describedby="cofirmnote"
-          placeholder="Confirm Password"
-          onFocus={() => setMatchFocus(true)}
-          onBlur={() => setMatchFocus(false)}
-        />
-      </div>
-      {matchFocus && !validMatch ? (
-        <div id="confirmnote" className={"flex flex-row gap-2 -mt-4 mb-3"}>
-          <ExclamationCircleIcon
-            className={"flex-none w-5 text-gray-500"}
-          ></ExclamationCircleIcon>
-          <p
-            className={"flex-grow self-center text-black text-sm items-center"}
-          >
-            Must match both password field.
-          </p>
-        </div>
-      ) : (
-        <div></div>
-      )} */}
-      {/* <Dropdown> </Dropdown> */}
-
-      {/* <div className="form-group form-check text-center mb-6">
-          <input
-            type="checkbox"
-            className="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain mr-2 cursor-pointer"
-            id="exampleCheck25"
-            onChange={() => {}}
-            checked
-          />
-          <label className="form-check-label inline-block text-gray-800">
-            Subscribe to our newsletter
-          </label>
-        </div> */}
     </div>
   );
 };

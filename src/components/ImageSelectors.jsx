@@ -55,22 +55,21 @@ const ImageSelectors = ({ selectedFile, onFileSelect }) => {
 
 const SquareImageSelector = ({ selectedFile, onFileSelect, imageType }) => {
   const handleFileInput = (e) => {
+    console.log(e.target.files);
     onFileSelect(e.target.files[0]);
   };
 
   return (
-    <div className="mb-5 text-center" id={imageType} key={imageType}>
+    <div className="mb-5 text-center" id={imageType}>
       <div className="mx-auto w-32 h-32 mb-2 border rounded-md relative bg-gray-100 mb-4 shadow-inset">
         <img
-          id={imageType}
-          key={imageType}
           className="object-cover w-full h-32 rounded-md"
           src={selectedFile ? URL.createObjectURL(selectedFile) : " "}
         />
       </div>
 
       <label
-        htmlFor="fileInput"
+        htmlFor={"fileInput " + imageType}
         type="button"
         className="cursor-pointer inine-flex justify-between items-center focus:outline-none border py-2 px-4 rounded-lg shadow-sm text-left text-gray-600 bg-white hover:bg-gray-100 font-medium"
       >
@@ -97,11 +96,12 @@ const SquareImageSelector = ({ selectedFile, onFileSelect, imageType }) => {
 
       <input
         name="photo"
-        id="fileInput"
+        id={"fileInput " + imageType}
         accept="image/*"
         className="hidden"
         type="file"
         onChange={handleFileInput}
+        // onChange={(e) => onFileSelect(e.target.files[0])}
       />
     </div>
   );

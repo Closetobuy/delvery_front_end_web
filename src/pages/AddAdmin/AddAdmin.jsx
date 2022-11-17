@@ -1,17 +1,17 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Header } from "../components";
-import Dropdown from "../components/Dropdown";
+import { Header } from "../../components";
+import Dropdown from "../../components/Dropdown";
 import { ColorRing } from "react-loader-spinner";
 import {
   ExclamationCircleIcon,
   EyeIcon,
   EyeSlashIcon,
 } from "@heroicons/react/24/solid";
-import useAxiosPrivate from "../hooks/useAxiosPrivate";
-import { USER_REGEX, PWD_REGEX, EMAIL_REGEX } from "../utils/regex";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import { USER_REGEX, PWD_REGEX, EMAIL_REGEX } from "../../utils/regex";
 const REGISTER_URL = "/v1/users";
 import { useNavigate, useLocation } from "react-router-dom";
-import { ImageSelectors } from "../components/ImageSelectors";
+import { ImageSelectors } from "../../components/ImageSelectors";
 
 const AddAdmin = () => {
   const userRef = useRef();
@@ -61,11 +61,6 @@ const AddAdmin = () => {
   }, [email]);
 
   useEffect(() => {
-    const result = role === "Admin" || role === "User" ? true : false;
-    setValidRole(result);
-  }, [role]);
-
-  useEffect(() => {
     const result = PWD_REGEX.test(pwd);
     setValidPwd(result);
     setValidMatch(pwd === matchPwd);
@@ -73,7 +68,7 @@ const AddAdmin = () => {
 
   useEffect(() => {
     setErrMsg("");
-  }, [user, pwd, matchPwd, email]);
+  }, [user, pwd, matchPwd, email, role]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -89,7 +84,21 @@ const AddAdmin = () => {
       return;
     }
     setLoading(true);
+
     try {
+      var uploadResponse = null;
+      if (selectedFile) {
+        var formData = new FormData();
+        formData.append("file", selectedFile);
+        formData.append("type", "profile");
+        console.log(formData);
+        uploadResponse = await axiosPrivate.post("/v1/upload", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+      }
+
       const response = await axiosPrivate.post(
         REGISTER_URL,
         JSON.stringify({
@@ -97,6 +106,7 @@ const AddAdmin = () => {
           email: email,
           password: pwd,
           role: role === "Admin" ? "admin" : "user",
+          profileImage: uploadResponse?.data.pathName,
         })
       );
       console.log(response?.data);
@@ -108,6 +118,7 @@ const AddAdmin = () => {
       setMatchPwd("");
       setEmail("");
       setRole("");
+      setSelectedFile(null);
     } catch (err) {
       if (!err?.response) {
         setErrMsg("No Server Response");
@@ -332,11 +343,7 @@ const AddAdmin = () => {
           ) : (
             <button
               type="submit"
-              disabled={
-                !validPwd || !validMatch || !validEmail || !validRole
-                  ? true
-                  : false
-              }
+              disabled={!validPwd || !validMatch || !validEmail ? true : false}
               className="mt-5 px-6 py-2.5 bg-blue-600 text-white text-center font-medium text-xs leading-tight rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
             >
               Add Admin

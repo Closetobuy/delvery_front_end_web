@@ -7,12 +7,13 @@ import {
   Search,
   Page,
 } from "@syncfusion/ej2-react-grids";
-
 import { employeesData, employeesGrid } from "../data/dummy";
 import { Header } from "../components";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import useRefreshToken from "../hooks/useRefreshToken";
 import { useNavigate, useLocation } from "react-router-dom";
+import defaultProfile from "../assets/defaultProfile.webp";
+
 const Admins = () => {
   const [users, setUsers] = useState();
   const refresh = useRefreshToken();
@@ -71,12 +72,14 @@ const Admins = () => {
       adminStruct.push({
         EmployeeID: 1,
         Name: admin.name,
-        Title: "Sales Representative",
+        Title: admin.role,
         HireDate: admin.role,
         Country: "USA",
         ReportsTo: "Carson",
         EmployeeImage:
-          "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1920px-Image_created_with_a_mobile_phone.png",
+          localStorage.getItem("baseUrl") === ""
+            ? defaultProfile
+            : localStorage.getItem("baseUrl") + admin.profileImage,
       });
     });
     console.log(employeesData);
